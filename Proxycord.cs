@@ -59,7 +59,7 @@ namespace Proxycord
                     };
                     session.HandshakeReceived += (sender, handshake) =>
                     {
-                        Log.Info($"Received valid Minecraft handshake from {clientName}. Given IP = {handshake.ServerAddress}:{handshake.Port} (protocol version = {handshake.ProtocolVersion}).");
+                        Log.Info($"Received valid Minecraft handshake from {clientName}. Given IP = {handshake.ServerAddressWithoutMagicString}:{handshake.Port} (protocol version = {handshake.ProtocolVersion}).");
                     };
 
                     try
@@ -68,7 +68,7 @@ namespace Proxycord
                     }
                     catch (Session.NoServersMatchException noServersException)
                     {
-                        Log.Warn($"{clientName} tried to connect to {noServersException.Handshake.ServerAddress} (protocol version = {noServersException.Handshake.ProtocolVersion}), but no suitable servers matched.");
+                        Log.Warn($"{clientName} tried to connect to {noServersException.Handshake.ServerAddressWithoutMagicString} (protocol version = {noServersException.Handshake.ProtocolVersion}), but no suitable servers matched.");
                     }
                     catch (Exception)
                     {
