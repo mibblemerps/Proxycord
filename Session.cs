@@ -107,6 +107,10 @@ namespace Proxycord
 
                 // Proxy traffic backwards and forwards
                 Task.WaitAny(client.CopyToAsync(tunnel), tunnel.CopyToAsync(client));
+
+                // Close connection
+                tunnel?.Close();
+                client?.Close();
             }
             catch {}
         }
