@@ -106,7 +106,7 @@ namespace Proxycord
                 await tunnel.WriteAsync(resendHandshakeBytes, 0, resendHandshakeBytes.Length); // Packet body
 
                 // Proxy traffic backwards and forwards
-                Task.WaitAny(client.CopyToAsync(tunnel), tunnel.CopyToAsync(client));
+                await Task.WhenAny(client.CopyToAsync(tunnel), tunnel.CopyToAsync(client));
 
                 // Close connection
                 tunnel?.Close();
